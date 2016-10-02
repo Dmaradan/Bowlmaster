@@ -3,25 +3,32 @@ using System.Collections;
 
 public class BallScript : MonoBehaviour {
 
-    public float velocity = 1;
+    public Vector3 launchVelocity;
     Rigidbody rigidBody;
-    AudioSource source;
+    AudioSource audioSource;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         rigidBody = GetComponent<Rigidbody>();
-        source = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
-        rigidBody.velocity = Vector3.forward * velocity;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+        Launch();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public void Launch()
+    {
+        rigidBody.velocity = launchVelocity;
+    }
 
     void OnCollisionEnter(Collision collision)
     {
-        source.Play();
+        audioSource.Play();
     }
 }
