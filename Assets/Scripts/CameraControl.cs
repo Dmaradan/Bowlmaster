@@ -17,6 +17,10 @@ public class CameraControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        gameObject.transform.position = ball.transform.position + offset;
+        // Move camera until ball hits the pins
+        if (ball.transform.position.z <= 1829)
+        {
+            gameObject.transform.position = ball.transform.position + offset;
+        }
 	}
 }
