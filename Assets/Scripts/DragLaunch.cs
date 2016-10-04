@@ -8,6 +8,8 @@ public class DragLaunch : MonoBehaviour {
     private float startTime, endTime;
     private Vector3 dragStart, dragEnd;
 
+    private float LANESIDEWIDTH = (105f / 2) - 12;
+
 	// Use this for initialization
 	void Start () {
         ball = GetComponent<BallScript>();
@@ -33,5 +35,22 @@ public class DragLaunch : MonoBehaviour {
 
         Vector3 launchVelocity = new Vector3 (launchSpeedX, 0, launchSpeedZ);
         ball.LaunchWithVelocity(launchVelocity);
+    }
+
+    public void MoveStart(float xNudge)
+    {
+
+        Vector3 ballPosition = ball.transform.position;
+
+
+        Debug.Log("The Lanes Width is" + LANESIDEWIDTH);
+        Debug.Log("The ball position is" + ballPosition.x);
+        Debug.Log(ballPosition.x <= LANESIDEWIDTH);
+      
+        // move the ball on x axis if it has not launched
+        if (!ball.inPlay && (ballPosition.x <= LANESIDEWIDTH && ballPosition.x >= -LANESIDEWIDTH))
+        {
+            ball.transform.position += new Vector3(xNudge, 0, 0);
+        } 
     }
 }

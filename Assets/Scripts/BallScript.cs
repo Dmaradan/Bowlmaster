@@ -4,6 +4,7 @@ using System.Collections;
 public class BallScript : MonoBehaviour {
 
     public Vector3 launchVelocity;
+    public bool inPlay = false;
     Rigidbody rigidBody;
     AudioSource audioSource;
 
@@ -20,6 +21,7 @@ public class BallScript : MonoBehaviour {
 
     public void LaunchWithVelocity(Vector3 velocity)
     {
+        inPlay = true;
         rigidBody.useGravity = true;
         rigidBody.velocity = velocity;
     }
