@@ -11,20 +11,17 @@ public class BallScript : MonoBehaviour {
 	void Start ()
     {
         rigidBody = GetComponent<Rigidbody>();
+        rigidBody.useGravity = false;
+
         audioSource = GetComponent<AudioSource>();
 
-        Launch();
+        //LaunchWithVelocity(launchVelocity);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LaunchWithVelocity(Vector3 velocity)
     {
-
-    }
-
-    public void Launch()
-    {
-        rigidBody.velocity = launchVelocity;
+        rigidBody.useGravity = true;
+        rigidBody.velocity = velocity;
     }
 
     void OnCollisionEnter(Collision collision)
