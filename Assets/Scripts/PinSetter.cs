@@ -5,11 +5,12 @@ using UnityEngine.UI;
 public class PinSetter : MonoBehaviour {
 
     public Text pinsStandingText;
+    private bool ballEnteredBox = false;
 
 	// Use this for initialization
 	void Start () {
 
-        //Text pinsStandingText = GameObject.FindObjectOfType<Text>();
+   
 	}
 	
 	// Update is called once per frame
@@ -30,6 +31,30 @@ public class PinSetter : MonoBehaviour {
         }
 
         return standing;
+    }
+
+    void OnTriggerExit(Collider collider)
+    {
+        GameObject thingExited = collider.gameObject;
+        
+        if(thingExited.GetComponentInParent<Pin>())
+        {
+            Debug.Log("Pin Destructoided");
+            Destroy(thingExited);
+        }
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        // check if ball or pin
+
+        GameObject thingHit = collider.gameObject;
+
+        if (thingHit.GetComponent<BallScript>())
+        {
+            pinsStandingText.color = Color.red;
+            ballEnteredBox = true;
+        } 
     }
 
 

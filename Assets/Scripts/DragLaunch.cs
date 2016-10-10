@@ -28,12 +28,12 @@ public class DragLaunch : MonoBehaviour {
         dragEnd = Input.mousePosition;
         endTime = Time.time;
 
-        float dragDuration = endTime - startTime;
+        float dragDuration = endTime - (startTime);
 
         float launchSpeedX = (dragEnd.x - dragStart.x) / dragDuration;
         float launchSpeedZ = ((dragEnd.y - dragStart.y) / dragDuration);
 
-        Vector3 launchVelocity = new Vector3 (launchSpeedX, 0, launchSpeedZ);
+        Vector3 launchVelocity = new Vector3 (launchSpeedX, 0, (2 *launchSpeedZ));
         ball.LaunchWithVelocity(launchVelocity);
     }
 
