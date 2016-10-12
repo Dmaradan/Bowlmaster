@@ -5,8 +5,11 @@ public class BallScript : MonoBehaviour {
 
     public Vector3 launchVelocity;
     public bool inPlay = false;
-    Rigidbody rigidBody;
-    AudioSource audioSource;
+
+
+    private Rigidbody rigidBody;
+    private Vector3 startPosition;
+    private AudioSource audioSource;
 
 	// Use this for initialization
 	void Start ()
@@ -16,7 +19,8 @@ public class BallScript : MonoBehaviour {
 
         audioSource = GetComponent<AudioSource>();
 
-        //LaunchWithVelocity(launchVelocity);
+        // Get position for reset
+        startPosition = rigidBody.transform.position;
     }
 
     public void LaunchWithVelocity(Vector3 velocity)
@@ -29,5 +33,15 @@ public class BallScript : MonoBehaviour {
     void OnCollisionEnter(Collision collision)
     {
         audioSource.Play();
+    }
+
+    public void Reset()
+    {
+        Debug.Log("Resetting Ball");
+        audioSource.Stop();
+        rigidBody.transform.position = startPosition;
+        rigidBody.velocity = new Vector3(0,0,0);
+        rigidBody.angularVelocity = new Vector3(0, 0, 0);
+        rigidBody.useGravity = false;
     }
 }
