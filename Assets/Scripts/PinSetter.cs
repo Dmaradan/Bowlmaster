@@ -133,8 +133,11 @@ public class PinSetter : MonoBehaviour {
         {
             if (pin.IsStanding())
             {
-                pin.transform.Translate(new Vector3 (0, distanceToRaise, 0));
                 Rigidbody rigidBody = pin.GetComponent<Rigidbody>();
+                rigidBody.velocity = Vector3.zero;
+                rigidBody.angularVelocity = Vector3.zero;
+                pin.transform.Translate(new Vector3 (0, distanceToRaise, 0), Space.World);
+                
                 rigidBody.useGravity = false;
             }
         }
@@ -144,10 +147,12 @@ public class PinSetter : MonoBehaviour {
     {
         foreach (Pin pin in GameObject.FindObjectsOfType<Pin>())
         {
-
-                pin.transform.Translate(new Vector3(0, -distanceToRaise, 0));
-                Rigidbody rigidBody = pin.GetComponent<Rigidbody>();
-                rigidBody.useGravity = true;
+            Rigidbody rigidBody = pin.GetComponent<Rigidbody>();
+            rigidBody.velocity = Vector3.zero;
+            rigidBody.angularVelocity = Vector3.zero;
+            pin.transform.Translate(new Vector3(0, -distanceToRaise, 0), Space.World);
+                
+            rigidBody.useGravity = true;
 
         }
     }
