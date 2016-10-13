@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PinSetter : MonoBehaviour {
     public int lastStandingCount = -1;
     public Text pinsStandingText;
+    public float distanceToRaise = 40f;
 
     private float lastChangeTime = 0f;
     private bool ballEnteredBox = false;
@@ -105,5 +106,54 @@ public class PinSetter : MonoBehaviour {
         } 
     }
 
+    /* Animation Helper Functions */
 
+    public void Reset()
+    {
+        SetTrigger("resetTrigger");
+    }
+
+    public void Tidy()
+    {
+        SetTrigger("tidyTrigger");
+    }
+
+    void SetTrigger(string triggerName)
+    {
+        var animator = GetComponent<Animator>();
+        animator.SetTrigger(triggerName);
+    }
+
+    public void RaisePins()
+    {
+        // raise standing pins only by distanceToRaise
+        Debug.Log("Raising pins");
+
+        foreach (Pin pin in GameObject.FindObjectsOfType<Pin>())
+        {
+            if (pin.IsStanding())
+            {
+                pin.transform.Translate(new Vector3 (0, distanceToRaise, 0));
+                Rigidbody rigidBody = pin.GetComponent<Rigidbody>();
+                rigidBody.useGravity = false;
+            }
+        }
+    }
+
+    public void LowerPins()
+    {
+        foreach (Pin pin in GameObject.FindObjectsOfType<Pin>())
+        {
+
+                pin.transform.Translate(new Vector3(0, -distanceToRaise, 0));
+                Rigidbody rigidBody = pin.GetComponent<Rigidbody>();
+                rigidBody.useGravity = true;
+
+        }
+    }
+
+    public void RenewPins()
+    {
+        Debug.Log("Renewing pins");
+    }
 }
