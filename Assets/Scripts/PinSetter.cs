@@ -64,23 +64,21 @@ public class PinSetter : MonoBehaviour {
     {
         if(lastChangeTime >= 3f)
         {
-
             PinsHaveSettled();
         }
     }
 
     void PinsHaveSettled()
     {
-        
         pinsStandingText.color = Color.green;
         ballEnteredBox = false;
 
         if(ball.inPlay)
         {
             ballEnteredBox = false;
+            lastChangeTime = 0f;
             ball.Reset();
         }
-
     }
 
     void OnTriggerExit(Collider collider)
