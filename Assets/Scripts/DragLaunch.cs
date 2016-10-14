@@ -5,7 +5,8 @@ using System.Collections;
 public class DragLaunch : MonoBehaviour {
 
     private BallScript ball;
-    private float startTime, endTime;
+    private float startTime;
+    public float launchTime = 0, endTime = 0;
     private Vector3 dragStart, dragEnd;
 
     private float LANESIDEWIDTH = (105f / 2) - 12;
@@ -14,6 +15,21 @@ public class DragLaunch : MonoBehaviour {
 	void Start () {
         ball = GetComponent<BallScript>();
 	}
+
+    void Update()
+    {
+        if(endTime > 0)
+        {
+            launchTime += .05f;
+        }
+        print("launchTime is " + launchTime);
+        //reset ball if its been out there for too long
+        if(launchTime > 50f)
+        {
+            endTime = 0;
+            ball.Reset();
+        }
+    }
 	
     public void DragStart()
     {

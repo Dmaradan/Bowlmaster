@@ -48,6 +48,11 @@ public class BallScript : MonoBehaviour {
     public void Reset()
     {
         Debug.Log("Resetting Ball");
+
+        DragLaunch launcher = FindObjectOfType<DragLaunch>();
+        launcher.launchTime = 0;
+        launcher.endTime = 0;
+
         inPlay = false;
         audioSource.Stop();
         rigidBody.transform.position = startPosition;
