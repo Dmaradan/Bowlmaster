@@ -10,6 +10,7 @@ public class BallScript : MonoBehaviour {
     private Rigidbody rigidBody;
     private Vector3 startPosition;
     private AudioSource audioSource;
+    private bool isRolling = false;
 
 	// Use this for initialization
 	void Start ()
@@ -32,12 +33,22 @@ public class BallScript : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        audioSource.Play();
+        if(isRolling == false)
+        {
+            audioSource.Play();
+            isRolling = true;
+        } else
+        {
+            audioSource.Stop();
+            isRolling = false;
+        }
+        
     }
 
     public void Reset()
     {
         Debug.Log("Resetting Ball");
+        inPlay = false;
         audioSource.Stop();
         rigidBody.transform.position = startPosition;
         rigidBody.velocity = new Vector3(0,0,0);

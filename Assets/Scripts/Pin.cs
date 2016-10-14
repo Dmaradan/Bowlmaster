@@ -5,10 +5,13 @@ public class Pin : MonoBehaviour {
 
     public float standingThreshold = 3f;
 
+    private AudioSource audioSource;
+    private bool initialCollision = false;
+
 	// Use this for initialization
 	void Start () {
 
-        
+        audioSource = GetComponent<AudioSource>();
 	
 	}
 	
@@ -30,6 +33,18 @@ public class Pin : MonoBehaviour {
         } else
         {
             return false;
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!initialCollision)
+        {
+            initialCollision = true;
+        }
+        else
+        {
+            audioSource.Play();
         }
     }
 }
