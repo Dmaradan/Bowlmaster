@@ -22,7 +22,7 @@ public class DragLaunch : MonoBehaviour {
         {
             launchTime += .05f;
         }
-        print("launchTime is " + launchTime);
+        
         //reset ball if its been out there for too long
         if(launchTime > 50f)
         {
