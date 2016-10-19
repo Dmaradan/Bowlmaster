@@ -9,6 +9,8 @@ public class ActionMaster {
 	private int bowl = 1;
 
 	public Action Bowl (int pins) {
+
+		Debug.Log("Pins received = " + pins);
 		
 		if(pins < 0 || pins > 10) {throw new UnityException("Invalid pin amount");}
 
@@ -17,7 +19,7 @@ public class ActionMaster {
 			bowls[bowl - 1] = pins;
 
 			if(pins == 10) {
-				pins += 2;
+				pins += 1;
 				return Action.Reset;
 			} else {
 				bowl += 1;
@@ -48,10 +50,10 @@ public class ActionMaster {
 			return Action.EndTurn;
 		}
 
-		//other behavior
-
 		throw new UnityException("Not sure what action to return!");
 	}
+
+	/* Utility methods for testing */
 
 	public void setBowl(int theBowl) {
 		bowl = theBowl;

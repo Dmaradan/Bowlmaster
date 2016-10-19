@@ -11,11 +11,13 @@ public class PinSetter : MonoBehaviour {
     private float lastChangeTime = 0f;
     private bool ballEnteredBox = false;
     private BallScript ball;
+    private ActionMaster actionMaster;
+    private int standing;
 
 	// Use this for initialization
 	void Start () {
         ball = GameObject.FindObjectOfType<BallScript>();
-   
+        actionMaster = new ActionMaster();
 	}
 	
 	// Update is called once per frame
@@ -79,6 +81,17 @@ public class PinSetter : MonoBehaviour {
             lastChangeTime = 0f;
             ball.Reset();
         }
+
+        standing = CountStanding();
+
+        /* Call ActionMaster Bowl method*/
+        Bowl();
+    }
+
+    void Bowl() {
+        print("Bowling with pins = " + (10 - standing));
+        /* Check return value of Bowl */
+        print(actionMaster.Bowl(10 - standing));
     }
 
     void OnTriggerExit(Collider collider)

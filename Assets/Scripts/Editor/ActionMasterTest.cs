@@ -67,4 +67,18 @@ public class ActionMasterTest {
 		actionMaster.setBowl(19);
 		Assert.AreEqual(reset, actionMaster.Bowl(10));
 	}
+
+	[Test]
+	public void T090AndStrikeOn20ReturnsReset() {
+		actionMaster.setBowl(19);
+		actionMaster.Bowl(0);
+		Assert.AreEqual(reset, actionMaster.Bowl(10));
+	}
+
+	[Test]
+	public void T10Bowl20AfterStrikeOn19ReturnsTidyIfNotStrike() {
+		actionMaster.setBowl(19);
+		actionMaster.Bowl(10);
+		Assert.AreEqual(tidy, actionMaster.Bowl(5));
+	}
 }
