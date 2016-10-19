@@ -23,7 +23,8 @@ public class PinSetter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        pinsStandingText.text = CountStanding().ToString();
+
+        UpdateText();
 
         if(ballEnteredBox)
         {
@@ -95,11 +96,15 @@ public class PinSetter : MonoBehaviour {
         string action = (actionMaster.Bowl(currentStanding - standing)).ToString();
         currentStanding = standing;
         if(action == "EndTurn" || action == "Reset") {
-            SetTrigger("resetTrigger");
+            Reset();
         } else if(action == "Tidy") {
-            SetTrigger("tidyTrigger");
+            Tidy();
         }
 
+    }
+
+    void UpdateText() {
+        pinsStandingText.text = CountStanding().ToString();
     }
 
     void OnTriggerExit(Collider collider)
@@ -108,7 +113,6 @@ public class PinSetter : MonoBehaviour {
         
         if(thingExited.GetComponentInParent<Pin>())
         {
-            Debug.Log("Pin Destructoided");
             Destroy(thingExited);
         }
     }
@@ -130,6 +134,8 @@ public class PinSetter : MonoBehaviour {
 
     public void Reset()
     {
+        currentStanding = 10;
+        print(currentStanding);
         SetTrigger("resetTrigger");
     }
 
