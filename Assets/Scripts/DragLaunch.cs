@@ -16,20 +16,20 @@ public class DragLaunch : MonoBehaviour {
         ball = GetComponent<BallScript>();
 	}
 
-    void Update()
-    {
-        if(endTime > 0)
-        {
-            launchTime += .05f;
-        }
+    // void Update()
+    // {
+    //     if(endTime > 0)
+    //     {
+    //         launchTime += .05f;
+    //     }
         
-        //reset ball if its been out there for too long
-        if(launchTime > 50f)
-        {
-            endTime = 0;
-            ball.Reset();
-        }
-    }
+    //     //reset ball if its been out there for too long
+    //     if(launchTime > 50f)
+    //     {
+    //         endTime = 0;
+    //         ball.Reset();
+    //     }
+    // }
 	
     public void DragStart()
     {

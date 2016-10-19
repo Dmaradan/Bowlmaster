@@ -9,7 +9,7 @@ public class PinSetter : MonoBehaviour {
     public GameObject pinSet;
 
     private float lastChangeTime = 0f;
-    private bool ballEnteredBox = false;
+    private bool ballLeftBox = false;
     private BallScript ball;
     private ActionMaster actionMaster;
     private int currentStanding = 10;
@@ -26,11 +26,15 @@ public class PinSetter : MonoBehaviour {
 
         UpdateText();
 
-        if(ballEnteredBox)
+        if(ballLeftBox)
         {
             CheckStanding();
         }
 	}
+
+    public void SetBox() {
+        ballLeftBox = true;
+    }
 
     int CountStanding()
     {
@@ -44,7 +48,7 @@ public class PinSetter : MonoBehaviour {
             }
         }
 
-        if (ballEnteredBox)
+        if (ballLeftBox)
         {
             UpdateLastChangeTime(standing);
         }
@@ -75,11 +79,11 @@ public class PinSetter : MonoBehaviour {
     void PinsHaveSettled()
     {
         pinsStandingText.color = Color.green;
-        ballEnteredBox = false;
+        ballLeftBox = false;
 
         if(ball.inPlay)
         {
-            ballEnteredBox = false;
+            ballLeftBox = false;
             lastChangeTime = 0f;
             ball.Reset();
         }
@@ -126,7 +130,7 @@ public class PinSetter : MonoBehaviour {
         if (thingHit.GetComponent<BallScript>())
         {
             pinsStandingText.color = Color.red;
-            ballEnteredBox = true;
+            ballLeftBox = true;
         } 
     }
 
