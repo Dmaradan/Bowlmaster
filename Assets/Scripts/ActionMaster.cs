@@ -15,8 +15,14 @@ public class ActionMaster {
 		//last frame
 		if(bowl == 19) {
 			bowls[bowl - 1] = pins;
-			bowl += 1;
-			return Action.Tidy;
+
+			if(pins == 10) {
+				pins += 2;
+				return Action.Reset;
+			} else {
+				bowl += 1;
+				return Action.Tidy;
+			}
 		} else if(bowl == 20) {
 			bowls[bowl - 1] = pins;
 			if(bowls[18] + bowls[19] == 10) {
