@@ -12,6 +12,7 @@ public class PinSetter : MonoBehaviour {
     private bool ballEnteredBox = false;
     private BallScript ball;
     private ActionMaster actionMaster;
+    private int currentStanding = 10;
     private int standing;
 
 	// Use this for initialization
@@ -89,9 +90,16 @@ public class PinSetter : MonoBehaviour {
     }
 
     void Bowl() {
-        print("Bowling with pins = " + (10 - standing));
+        print("Bowling with pins = " + (currentStanding - standing));
         /* Check return value of Bowl */
-        print(actionMaster.Bowl(10 - standing));
+        string action = (actionMaster.Bowl(currentStanding - standing)).ToString();
+        currentStanding = standing;
+        if(action == "EndTurn" || action == "Reset") {
+            SetTrigger("resetTrigger");
+        } else if(action == "Tidy") {
+            SetTrigger("tidyTrigger");
+        }
+
     }
 
     void OnTriggerExit(Collider collider)
