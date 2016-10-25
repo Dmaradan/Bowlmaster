@@ -16,20 +16,6 @@ public class DragLaunch : MonoBehaviour {
         ball = GetComponent<BallScript>();
 	}
 
-    // void Update()
-    // {
-    //     if(endTime > 0)
-    //     {
-    //         launchTime += .05f;
-    //     }
-        
-    //     //reset ball if its been out there for too long
-    //     if(launchTime > 50f)
-    //     {
-    //         endTime = 0;
-    //         ball.Reset();
-    //     }
-    // }
 	
     public void DragStart()
     {
@@ -40,17 +26,19 @@ public class DragLaunch : MonoBehaviour {
 
     public void DragEnd()
     {
-        // Launch the ball
-        dragEnd = Input.mousePosition;
-        endTime = Time.time;
+        if(!ball.inPlay) {
+            // Launch the ball
+            dragEnd = Input.mousePosition;
+            endTime = Time.time;
 
-        float dragDuration = endTime - (startTime);
+            float dragDuration = endTime - (startTime);
 
-        float launchSpeedX = (dragEnd.x - dragStart.x) / dragDuration;
-        float launchSpeedZ = ((dragEnd.y - dragStart.y) / dragDuration);
+            float launchSpeedX = (dragEnd.x - dragStart.x) / dragDuration;
+            float launchSpeedZ = ((dragEnd.y - dragStart.y) / dragDuration);
 
-        Vector3 launchVelocity = new Vector3 (launchSpeedX, 0, launchSpeedZ);
-        ball.LaunchWithVelocity(launchVelocity);
+            Vector3 launchVelocity = new Vector3 (launchSpeedX, 0, launchSpeedZ);
+            ball.LaunchWithVelocity(launchVelocity);
+        }
     }
 
     public void MoveStart(float xNudge)
