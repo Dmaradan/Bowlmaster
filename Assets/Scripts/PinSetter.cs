@@ -46,6 +46,11 @@ public class PinSetter : MonoBehaviour {
             {
                 standing += 1;
             }
+
+            //edge case where too many pins detected
+            if(standing > 10) {
+                standing = 10;
+            }
         }
 
         if (ballLeftBox)
